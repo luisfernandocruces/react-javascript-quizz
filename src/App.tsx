@@ -1,34 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '../../../../../../vite.svg'
+
 import './App.css'
+import { Container, Stack, Typography } from '@mui/material'
+import { JavascriptLogo } from './assets/JavascriptLogo'
+import { Start } from './Start'
+import { useQuestionsStore } from './store/questions'
 
 function App () {
-  const [count, setCount] = useState(0)
-
+  const questions = useQuestionsStore(state => state.questions)
   return (
-    <>
-      <div>
-        <a href='https://vitejs.dev' target='_blank' rel='noreferrer'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank' rel='noreferrer'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main>
+      <Container maxWidth='sm'>
+
+        <Stack direction='row' gap={2} alignItems='center' justifyContent='center'>
+          <JavascriptLogo />
+          <Typography variant='h2' component='h1'>
+            Javascript Quiz
+          </Typography>
+        </Stack>
+
+        {questions.length === 0 && <Start />}
+        {questions.length > 0 && <h1>Quiz</h1>}
+
+      </Container>
+    </main>
   )
 }
 
